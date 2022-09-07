@@ -1,15 +1,39 @@
-import {styled} from "../styles"
+import Image from 'next/image'
+import {HomeContainer, Product} from "../styles/pages/home";
 
-const Button = styled('button', {
-  backgroundColor: '$rocketseat',
-	padding: '4px 8px',
-	border: 0,
-	borderRadius: 4,
-	color: '#f0f2f5'
-})
+import IgniteTShirt from '../assets/explorer-t-shirt.png'
+import ExplorerTShirt from '../assets/igniter-abord-t-shirt.png'
 
 export default function Home() {
   return (
-	  <Button>Hello world</Button>
+	  <HomeContainer>
+		  <Product>
+			  <Image
+				  src={ExplorerTShirt.src}
+					width={520}
+					height={480}
+					alt=""
+				/>
+				<footer>
+				  <strong>ExplorerTShirt</strong>
+					<span>R$ 79,90</span>
+				</footer>
+			</Product>
+
+			<Product>
+			  <Image
+				  src={IgniteTShirt.src}
+					width={520}
+					height={480}
+					alt=""
+				/>
+
+				<footer>
+				  <strong>IgniteTShirt</strong>
+
+					<span>R$ 79,90</span>
+				</footer>
+			</Product>
+		</HomeContainer>
 	)
 }
