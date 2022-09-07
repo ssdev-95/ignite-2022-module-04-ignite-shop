@@ -12,14 +12,18 @@
     "@stitches/react": "^1.2.8",
     "keen-slider": "^6.7.0",
     "next": "12.2.5",
+    "phosphor-react": "^1.4.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "stripe": "^10.8.0"
   },
   "devDependencies": {
     "@types/node": "^18.7.15",
     "@types/react": "^18.0.18",
     "eslint": "8.23.0",
     "eslint-config-next": "12.2.5",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.7.1",
     "typescript": "^4.8.2"
   }
 }

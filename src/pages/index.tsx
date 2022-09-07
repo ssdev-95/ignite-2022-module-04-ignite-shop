@@ -1,85 +1,85 @@
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import { useKeenSlider } from 'keen-slider/react'
+import Stripe from 'stripe'
+import { ShoppingCartSimple } from 'phosphor-react'
 
-import {HomeContainer, Product} from "../styles/pages/home";
+import { stripe } from '../lib/stripe'
+import { HomeContainer, Product } from '../styles/pages/home'
 
 import 'keen-slider/keen-slider.min.css'
+import { theme } from '../styles'
 
-import ExplorerTShirt from '../assets/explorer-t-shirt.png'
-import IgniteTShirt from '../assets/igniter-abord-t-shirt.png'
-import MarathonTShirt from '../assets/marathon-t-shirt.png'
-import IgniteLabTShirt from '../assets/ignite-lab-t-shirt.png'
+interface Product {
+  id: string
+  name: string
+  imageURL: string
+  price: string
+}
 
-export default function Home() {
+interface HomeProps {
+  products: Product[]
+}
+
+export default function Home({ products }: HomeProps) {
   const [sliderRef] = useKeenSlider({
-	  slides: {
-		  perView: 1,
-			spacing: 48
-		}
-	})
+    slides: {
+      perView: 1,
+      spacing: 48,
+    },
+  })
 
   return (
-	  <HomeContainer
-		  ref={sliderRef}
-			className="keen-slider"
-		>
-		  <Product className="keen-slider__slide">
-			  <Image
-				  src={ExplorerTShirt.src}
-					width={520}
-					height={480}
-					alt=""
-				/>
-				<footer>
-				  <strong>ExplorerTShirt</strong>
-					<span>R$ 79,90</span>
-				</footer>
-			</Product>
+    <HomeContainer ref={sliderRef} className="keen-slider">
+      {products.map((product) => (
+        <Product
+          className="keen-slider__slide"
+          key={product.id}
+          href={`/product/${product.id}`}
+        >
+          <Image src={product.imageURL} width={520} height={480} alt="" />
+          <footer>
+            <strong>
+              {product.name}
+              <span>{product.price}</span>
+            </strong>
 
-			<Product className="keen-slider__slide">
-			  <Image
-				  src={IgniteTShirt.src}
-					width={520}
-					height={480}
-					alt=""
-				/>
+            <div>
+              <ShoppingCartSimple
+                size={32}
+                color={theme.colors.gray100.value}
+              />
+            </div>
+          </footer>
+        </Product>
+      ))}
+    </HomeContainer>
+  )
+}
 
-				<footer>
-				  <strong>IgniteTShirt</strong>
+export const getStaticProps: GetStaticProps = async () => {
+  const response = await stripe.products.list({
+    expand: ['data.default_price'],
+  })
 
-					<span>R$ 79,90</span>
-				</footer>
-			</Product>
+  const products = response.data.map((product) => {
+    const price = product.default_price as Stripe.Price
 
-			<Product className="keen-slider__slide">
-			  <Image
-				  src={MarathonTShirt.src}
-					width={520}
-					height={480}
-					alt=""
-				/>
+    return {
+      id: product.id,
+      name: product.name,
+      imageURL: product.images[0],
+      price: new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(price.unit_amount / 100),
+    }
+  })
 
-				<footer>
-				  <strong>MarathonTShirt</strong>
-
-					<span>R$ 79,90</span>
-				</footer>
-			</Product>
-
-			<Product className="keen-slider__slide">
-			  <Image
-				  src={IgniteLabTShirt.src}
-					width={520}
-					height={480}
-					alt=""
-				/>
-
-				<footer>
-				  <strong>IgniteLabTShirt</strong>
-
-	  			<span>R$ 79,90</span>
-				</footer>
-			</Product>
-		</HomeContainer>
-	)
+  return {
+    props: {
+      products,
+    },
+    revalidate: 60 * 60 * 3,
+  }
 }
