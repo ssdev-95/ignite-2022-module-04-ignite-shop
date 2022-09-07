@@ -5,14 +5,12 @@ export const HomeContainer = styled('main', {
 	maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
 	minHeight: '656px',
 	display: 'flex',
-	gap: '3rem',
 	marginLeft: 'auto',
 	overflowY: 'hidden'
 })
 
 export const Product = styled('a', {
 	background: 'linear-gradient(180deg,#1ea483 0%, #7465d4 100%)',
-	padding: '0.25rem',
 	cursor: 'pointer',
 	borderRadius: 8,
 	position: 'relative',
