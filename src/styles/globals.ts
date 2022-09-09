@@ -12,9 +12,14 @@ export const globalStyles = globalCss({
   body: {
     backgroundColor: '$gray900',
     color: '$gray100',
+		scrollBehavior: 'smooth'
   },
   a: {
     color: '$gray100',
     textDecoration: 'none',
   },
+
+	'a, button': {
+		cursor: 'pointer'
+	}
 })

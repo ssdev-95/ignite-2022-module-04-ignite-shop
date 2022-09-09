@@ -38,3 +38,8 @@ export const {
     xl: '(max-width:1440px)',
   },
 })
+
+export const showup = keyframes({
+	'0%': { opacity:0 },
+	'100%': { opacity: 1}
+})

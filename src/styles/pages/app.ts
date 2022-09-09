@@ -8,9 +8,3 @@ export const Container = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
 })
-
-export const Header = styled('header', {
-  width: '100%',
-  maxWidth: '1440px',
-  padding: '2rem 1rem',
-})
