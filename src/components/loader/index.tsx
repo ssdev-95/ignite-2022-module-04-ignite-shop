@@ -4,6 +4,6 @@ export function Loader() {
   return (
 	  <LoaderWrapper>
 		  <div />
-		</LoaderWrapper>
-	)
+    </LoaderWrapper>
+  )
 }

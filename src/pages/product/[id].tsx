@@ -12,38 +12,38 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = response.data.map((product) => ({
 	  params: { id: product.id }
-	}))
+  }))
 
   return {
 	  paths: [
 		  ...paths,
-			{ params: { id: 'prod_2iduskaoandnd292f' } }
-		],
-		fallback: true
-	}
+      { params: { id: 'prod_2iduskaoandnd292f' } }
+    ],
+    fallback: true
+  }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = params.id as string
-	const response = await stripe.products.retrieve(id, {
+  const response = await stripe.products.retrieve(id, {
 	  expand: ['default_price'],
-	})
+  })
 
-	const defaultPrice = response.default_price as Stripe.Price
+  const defaultPrice = response.default_price as Stripe.Price
 
-	const product = {
+  const product = {
 	  id,
-		priceId: defaultPrice.id,
-		price: formatPrice(defaultPrice.unit_amount),
+    priceId: defaultPrice.id,
+    price: formatPrice(defaultPrice.unit_amount),
 	  name: response.name,
-		description: response.description,
-		imageURL: response.images[0]
-	}
+    description: response.description,
+    imageURL: response.images[0]
+  }
 
   return {
     props: {
 		  product
-		},
+    },
     revalidate: 60 * 60 * 24 * 7,
   }
 }
@@ -53,13 +53,13 @@ type ProductProps = InferGetStaticPropsType<typeof getStaticProps>
 export default function Product({ product }: ProductProps) {
   const { isFallback } = useRouter()
 
-	if(isFallback) {
+  if(isFallback) {
 	  return (
 		  <Skeleton>
 			  <Loader/>
-			</Skeleton>
-		)
-	}
+      </Skeleton>
+    )
+  }
 
   return (
 	  <ProductContainer>
@@ -70,17 +70,17 @@ export default function Product({ product }: ProductProps) {
 	   			height={480}
 		  		alt=""
 		  	/>
-			</ImageContainer>
+      </ImageContainer>
 
-			<ProductDetails>
+      <ProductDetails>
     		<h1>{product.name}</h1>
 
-				<span>{product.price}</span>
+        <span>{product.price}</span>
 
-				<p>{product.description}</p>
+        <p>{product.description}</p>
 
-				<button>BUY NOW</button>
-			</ProductDetails>
-		</ProductContainer>
-	)
+        <button>BUY NOW</button>
+      </ProductDetails>
+    </ProductContainer>
+  )
 }

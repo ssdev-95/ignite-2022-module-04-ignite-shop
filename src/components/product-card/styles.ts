@@ -12,8 +12,8 @@ export const Product = styled('a', {
 
   img: {
     objectFit: 'cover',
-		transition: 'opacity 0.25s cubic-bezier(0.7,0.7,0.7,0.7)',
-		animation: `${showup} 750ms 1 cubic-bezier(0.7,0.7,0.7,0.7)`
+    transition: 'opacity 0.25s cubic-bezier(0.7,0.7,0.7,0.7)',
+    animation: `${showup} 750ms 1 cubic-bezier(0.7,0.7,0.7,0.7)`
   },
 
   footer: {

@@ -17,7 +17,7 @@ export function Header() {
 		  	alt=""
 		  />
 
-			{pathname.includes('product') && (
+      {pathname.includes('product') && (
 			  <Link href="/" >
 			    <a>
 				    <XIcon
@@ -26,7 +26,7 @@ export function Header() {
 					  />
 				  </a>
   			</Link>
-			)}
-		</HeaderContainer>
-	)
+      )}
+    </HeaderContainer>
+  )
 }

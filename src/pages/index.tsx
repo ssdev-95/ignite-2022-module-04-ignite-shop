@@ -33,8 +33,8 @@ export default function Home({ products }: HomeProps) {
       {products.map((product) => (
         <ProductCard
 				  key={product.id}
-					product={product}
-				/>
+          product={product}
+        />
       ))}
     </HomeContainer>
   )

@@ -20,13 +20,13 @@ interface CardProps {
 export function ProductCard({ product }:CardProps) {
   const [isLoading, setIsLoading] = useState(true)
 
-	useEffect(() => {
+  useEffect(() => {
 	  const timeout = setTimeout(() => {
 		  setIsLoading(false)
-		}, 3000)
+    }, 3000)
 
-		return () => clearTimeout(timeout)
-	}, [])
+    return () => clearTimeout(timeout)
+  }, [])
 
   return (
 	  <Link href={`/product/${product.id}`}>
@@ -38,7 +38,7 @@ export function ProductCard({ product }:CardProps) {
 	  		  	height={480}
 		    		alt=""
 	  	  	/>
-				)}
+        )}
 		  
   			<footer>
 			    <strong>
@@ -54,6 +54,6 @@ export function ProductCard({ product }:CardProps) {
 		  		</div>
 	  		</footer>
   		</Product>
-		</Link>
-	)
+    </Link>
+  )
 }
