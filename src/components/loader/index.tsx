@@ -8,6 +8,6 @@ export function Loader({ small=false }:LoaderProps) {
   return (
 	  <LoaderWrapper
 		  className={small ? 'small' : ''}
-		/>
+    />
   )
 }

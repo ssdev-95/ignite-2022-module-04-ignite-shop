@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { InferGetStaticPropsType, GetStaticPaths, GetStaticProps } from 'next'
+import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Stripe from 'stripe'
@@ -54,7 +55,7 @@ type ProductProps = InferGetStaticPropsType<typeof getStaticProps>
 
 export default function Product({ product }: ProductProps) {
   const { isFallback } = useRouter()
-	const [isPerformingCheckout, setIsPerformingCheckout] = useState(false)
+  const [isPerformingCheckout, setIsPerformingCheckout] = useState(false)
 
   async function handleBuyProduct() {
 	  try {
@@ -72,7 +73,7 @@ export default function Product({ product }: ProductProps) {
       window.location.href = checkoutUrl
     } catch {
 		  alert('Falied to perform operation: BUY_OPERATION')
-			setIsPerformingCheckout(false)
+      setIsPerformingCheckout(false)
     }
   }
 
@@ -85,6 +86,10 @@ export default function Product({ product }: ProductProps) {
   }
 
   return (
+    <>
+      <Head>
+		  <title>{product.name} | IgniteShop</title>
+      </Head>
 	  <ProductContainer>
 		  <ImageContainer>
 			  <Image
@@ -93,26 +98,27 @@ export default function Product({ product }: ProductProps) {
 	   			height={480}
 		  		alt=""
 		  	/>
-      </ImageContainer>
+        </ImageContainer>
 
-      <ProductDetails>
+        <ProductDetails>
     		<h1>{product.name}</h1>
 
-        <span>{product.price}</span>
+          <span>{product.price}</span>
 
-        <p>{product.description}</p>
+          <p>{product.description}</p>
 
-        <button
+          <button
 				  onClick={handleBuyProduct}
-					disabled={isPerformingCheckout}
-				>
+            disabled={isPerformingCheckout}
+          >
 				  {isPerformingCheckout ? (
 					  <Loader small />
-					) : (
+            ) : (
   				  <span>BUY NOW</span>
-					)}
-        </button>
-      </ProductDetails>
-    </ProductContainer>
+            )}
+          </button>
+        </ProductDetails>
+      </ProductContainer>
+    </>
   )
 }

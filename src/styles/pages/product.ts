@@ -68,7 +68,7 @@ export const ProductDetails = styled('div', {
   button: {
     marginTop: 'auto',
     backgroundColor: '$green500',
-		minHeight: '3rem',
+    minHeight: '3rem',
 		
     border: 0,
     borderRadius: 8,
@@ -76,23 +76,23 @@ export const ProductDetails = styled('div', {
 
     cursor: 'pointer',
 
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
 
-		span: {
-			color: '$white',
-			display: 'block',
-			fontSize: '$md',
-			fontWeight: 'bold',
-			marginTop: 0,
-			lineHeight: 1.5
-		},
+    span: {
+      color: '$white',
+      display: 'block',
+      fontSize: '$md',
+      fontWeight: 'bold',
+      marginTop: 0,
+      lineHeight: 1.5
+    },
 
-		'&:disabled': {
-			opacity: 0.6,
-			cursor: 'not-allowed'
-		},
+    '&:disabled': {
+      opacity: 0.6,
+      cursor: 'not-allowed'
+    },
 
     '&:not(:disabled):hover': {
       backgroundColor: '$green300'
