@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import type { InferGetStaticPropsType, GetStaticPaths, GetStaticProps } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Stripe from 'stripe'
 import {stripe} from '../../lib/stripe'
+import axios from 'axios'
 import { Loader } from '../../components/loader'
 import { ProductDetails, ProductContainer, ImageContainer, Skeleton } from '../../styles/pages/product'
 import { formatPrice } from '../../utils/priceFormat'
@@ -52,6 +54,27 @@ type ProductProps = InferGetStaticPropsType<typeof getStaticProps>
 
 export default function Product({ product }: ProductProps) {
   const { isFallback } = useRouter()
+	const [isPerformingCheckout, setIsPerformingCheckout] = useState(false)
+
+  async function handleBuyProduct() {
+	  try {
+		  setIsPerformingCheckout(true)
+
+		  const response = await axios.post(
+			  '/api/checkout',{
+				  lineItems: [
+					  { price: product.priceId, quantity: 1}
+          ]
+			  }
+      )
+
+      const { checkoutUrl } = response.data
+      window.location.href = checkoutUrl
+    } catch {
+		  alert('Falied to perform operation: BUY_OPERATION')
+			setIsPerformingCheckout(false)
+    }
+  }
 
   if(isFallback) {
 	  return (
@@ -79,7 +102,16 @@ export default function Product({ product }: ProductProps) {
 
         <p>{product.description}</p>
 
-        <button>BUY NOW</button>
+        <button
+				  onClick={handleBuyProduct}
+					disabled={isPerformingCheckout}
+				>
+				  {isPerformingCheckout ? (
+					  <Loader small />
+					) : (
+  				  <span>BUY NOW</span>
+					)}
+        </button>
       </ProductDetails>
     </ProductContainer>
   )

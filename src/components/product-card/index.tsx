@@ -29,7 +29,10 @@ export function ProductCard({ product }:CardProps) {
   }, [])
 
   return (
-	  <Link href={`/product/${product.id}`}>
+	  <Link
+		  prefetch={false}
+		  href={`/product/${product.id}`}
+    >
   	  <Product className="keen-slider__slide">
 			  {isLoading ? (<Loader />) : (
 	  	    <Image

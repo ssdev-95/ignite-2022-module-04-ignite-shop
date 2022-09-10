@@ -1,9 +1,13 @@
 import { LoaderWrapper } from './styles'
 
-export function Loader() {
+interface LoaderProps {
+  small?: boolean
+}
+
+export function Loader({ small=false }:LoaderProps) {
   return (
-	  <LoaderWrapper>
-		  <div />
-    </LoaderWrapper>
+	  <LoaderWrapper
+		  className={small ? 'small' : ''}
+		/>
   )
 }

@@ -11,6 +11,15 @@ export const LoaderWrapper = styled('div', {
   borderRadius: 56,
   position: 'relative',
 
+	'&.small': {
+		height: 24,
+		width: 24,
+
+		'&::before': {
+			background: '$green500',
+		}
+	},
+
   '&::after': {
     content: '',
     height: '100%',
