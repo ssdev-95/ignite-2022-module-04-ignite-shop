@@ -49,10 +49,15 @@ export const Product = styled('a', {
       marginTop: 4,
     },
 
-    div: {
+    button: {
       padding: 8,
+      border: 0,
       borderRadius: 4,
       backgroundColor: '$green300',
+
+      '&:hover': {
+        filter: 'brightness(0.6)'
+      }
     },
   },
 

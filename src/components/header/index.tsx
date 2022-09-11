@@ -1,32 +1,51 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Link from 'next/link'
-import { X as XIcon } from 'phosphor-react'
-import { HeaderContainer } from './styles'
-import { theme } from '../../styles'
+import { Handbag } from 'phosphor-react'
 
-export function Header() {
+import { useCart } from '../../contexts/cart'
+
+import { HeaderContainer, CartButton } from './styles'
+
+interface HeaderProps {
+  onModalOpen: () => void
+}
+
+export function Header({onModalOpen}:HeaderProps) {
   const { pathname } = useRouter()
+  const { cart } = useCart()
+
+  const cartCount = cart.length
 
   return (
 	  <HeaderContainer>
-	    <Image
-		    src="/logo.svg"
-  			width={120}
-	  		height={80}
-		  	alt=""
-		  />
-
-      {pathname.includes('product') && (
+	    {pathname.includes('product') ? (
 			  <Link href="/" >
-			    <a>
-				    <XIcon
-					    size={24}
-						  color={theme.colors['gray300'].value}
-					  />
-				  </a>
-  			</Link>
+  			  <a>
+  				  <Image
+  					  src="/logo.svg"
+              width={120}
+              height={80}
+              alt=""
+            />
+          </a>
+        </Link>
+      ) : (
+			  <Image
+				  src="/logo.svg"
+          width={120}
+          height={80}
+          alt=""
+        />
       )}
+
+      <CartButton onClick={onModalOpen}>
+			  {cartCount > 0 && (<div>{cartCount}</div>)}
+			  <Handbag
+				  weight="bold"
+          size={28}
+        />
+      </CartButton>
     </HeaderContainer>
   )
 }

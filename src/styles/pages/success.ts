@@ -48,21 +48,32 @@ export const SuccessContainer = styled('main', {
 })
 
 export const ImageContainer = styled('div', {
-  width: '100%',
-  maxWidth: 138,
-  height: 145,
+  width: 125,
+  maxWidth: '100%',
+  height: 125,
 
-  borderRadius: 8,
+  border: '3px solid $gray900',
+  borderRadius: 300,
   padding: '0.25rem',
-  marginTop: '4rem',
 
   backgroundImage: 'linear-gradient(180deg,#1ea483 0%, #7465d4 100%)',
 
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  boxShadow: '6px 6px 20px 10px $gray900',
 
   img: {
-    objectFit: 'cover'
+    objectFit: 'contain',//'cover',
+    zIndex: 0
+  },
+
+  '& + div': {
+    marginLeft: -40
   }
+})
+
+export const ProductsContainer = styled('div', {
+  display: 'flex',
+  margin: '4rem auto 0',
 })

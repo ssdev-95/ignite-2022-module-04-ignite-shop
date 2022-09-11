@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, MouseEvent } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ShoppingCartSimple } from 'phosphor-react'
+
+import { useCart } from '../../contexts/cart'
+
 import { Product } from './styles'
 import { Loader } from '../loader'
 import { theme } from '../../styles/index'
@@ -10,7 +13,8 @@ interface IProduct {
   id:string
 	name:string
 	imageURL:string
-	price:string
+	price:string,
+	priceId:string
 }
 
 interface CardProps {
@@ -19,6 +23,7 @@ interface CardProps {
 
 export function ProductCard({ product }:CardProps) {
   const [isLoading, setIsLoading] = useState(true)
+  const { addProductToCart } = useCart()
 
   useEffect(() => {
 	  const timeout = setTimeout(() => {
@@ -27,6 +32,18 @@ export function ProductCard({ product }:CardProps) {
 
     return () => clearTimeout(timeout)
   }, [])
+
+  function handleAddToCart(event:MouseEvent) {
+	  event.stopPropagation()
+
+    const newCartProduct = {
+		  ...product,
+      quantity: 1
+    }
+
+
+    addProductToCart(newCartProduct)
+  }
 
   return (
 	  <Link
@@ -49,12 +66,12 @@ export function ProductCard({ product }:CardProps) {
 	  				<span>{product.price}</span>
   				</strong>
 
-	  			<div>
+	  			<button onClick={handleAddToCart}>
   				  <ShoppingCartSimple
 					    size={32}
 				  		color={theme.colors.gray100.value}
 			  		/>
-		  		</div>
+		  		</button>
 	  		</footer>
   		</Product>
     </Link>
