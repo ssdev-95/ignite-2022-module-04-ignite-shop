@@ -35,7 +35,7 @@ An e-commerce like application, made to put down in code previous knowledge of:
 
 - [x] User can purchase one or more products from cart
 
-- [x] User can se how many items and the total price from cart
+- [x] User can see how many items and the total price from cart
 
 - [x] User can access details of a single product and purchase it from there
 
