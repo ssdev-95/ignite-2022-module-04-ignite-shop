@@ -1,3 +1,6 @@
+# Ignite Shop
+![Ignite Shop Banner](https://raw.githubusercontent.com/xSallus/ignite-2022-module-04-ignite-shop/main/public/banner.png)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
