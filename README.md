@@ -57,8 +57,11 @@ $ yarn && yarn dev
 $ npm install && npm run dev
 ```
 
+## Future updates
 
-> Before running locally environment variables must be set up..
+- [] Fix production build
+
+> Before running locally, some environment variables must be set up..
 >
 > Refer to .env.example file to see which one to configure correctly...
 >
