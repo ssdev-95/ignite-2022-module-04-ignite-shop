@@ -59,7 +59,7 @@ $ npm install && npm run dev
 
 ## Future updates
 
-- [] Fix production build
+- [ ] Fix production build
 
 > Before running locally, some environment variables must be set up..
 >
